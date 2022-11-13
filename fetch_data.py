@@ -17,8 +17,8 @@ for mac in args.mac:
         print()
 
         sql = """INSERT INTO MijaSensor(deviceName,
-          temperature, humidity)
-          VALUES ('MijaSensor 1', '{0}', '{1}')"""
+          temperature, humidity, battery)
+          VALUES ('MijaSensor 1', '{0}', '{1}', '{2}')"""
 
         db = MySQLdb.connect("192.168.1.40", "MijaSensor", "xiaomi", "MEASUREMENTS")
 
@@ -28,7 +28,7 @@ for mac in args.mac:
 
         try:
             # Execute the SQL command
-            cursor.execute(sql.format(data.temperature, data.humidity))
+            cursor.execute(sql.format(data.temperature, data.humidity, client.battery))
             # Commit your changes in the database
             db.commit()
         except Exception as e:
