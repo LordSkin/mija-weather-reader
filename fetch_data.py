@@ -31,7 +31,7 @@ for mac in args.mac:
             cursor.execute(sql.format(data.temperature, data.humidity))
             # Commit your changes in the database
             db.commit()
-        except:
+        except Exception as e:
             # Rollback in case there is any error
             print(e)
             db.rollback()
