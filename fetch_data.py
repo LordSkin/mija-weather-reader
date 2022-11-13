@@ -1,5 +1,5 @@
 import argparse
-
+import MySQLdb
 import lywsd03mmc
 
 parser = argparse.ArgumentParser()
