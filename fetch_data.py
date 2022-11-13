@@ -15,5 +15,30 @@ for mac in args.mac:
         print('Humidity: {}%'.format(data.humidity))
         print('Battery: {}%'.format(client.battery))
         print()
+
+        sql = """INSERT INTO MijaSensor(deviceName,
+          temperature, humidity)
+          VALUES ('MijaSensor 1', '{0}', '{1}', '{2}')"""
+
+        db = MySQLdb.connect("192.168.1.40", "MijaSensor", "xiaomi", "MEASUREMENTS")
+
+        cursor = db.cursor()
+
+        # execute SQL query using execute() method.
+
+        try:
+            # Execute the SQL command
+            cursor.execute(sql.format(data.temperature, data.humidity, client.battery))
+            # Commit your changes in the database
+            db.commit()
+        except:
+            # Rollback in case there is any error
+            db.rollback()
+
+        # disconnect from server
+        db.close()
+
     except Exception as e:
         print(e)
+
+
