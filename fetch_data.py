@@ -33,6 +33,7 @@ for mac in args.mac:
             db.commit()
         except:
             # Rollback in case there is any error
+            print(e)
             db.rollback()
 
         # disconnect from server
